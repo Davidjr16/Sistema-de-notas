@@ -1,6 +1,6 @@
 <?php
 require 'functions.php';
-if($_SESSION['rol'] =='Administrador') {
+if($_SESSION['rol'] =='Profesor') {
     if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         try {
             $id_alumno = $_GET['id'];

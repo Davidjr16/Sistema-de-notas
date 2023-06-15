@@ -1,7 +1,7 @@
 <?php
 require 'functions.php';
 
-$permisos = ['Administrador','Profesor'];
+$permisos = ['Profesor'];
 permisos($permisos);
 //consulta los alumnos para el listaddo de alumnos
 $alumnos = $conn->prepare("select a.id, a.num_lista, a.nombres, a.apellidos, a.genero, b.nombre as grado, c.nombre as seccion from alumnos as a inner join grados as b on a.id_grado = b.id inner join secciones as c on a.id_seccion = c.id order by a.apellidos");

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <?php
 require 'functions.php';
-$permisos = ['Administrador','Profesor','Acudiente'];
+$permisos = ['Profesor','Acudiente'];
 permisos($permisos);
 
 ?>

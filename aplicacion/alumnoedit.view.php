@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <?php
 require 'functions.php';
-$permisos = ['Administrador','Profesor'];
+$permisos = ['Profesor'];
 permisos($permisos);
 if(isset($_GET['id'])) {
 

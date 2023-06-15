@@ -2,7 +2,7 @@
 <?php
 require 'functions.php';
 //arreglo de permisos
-$permisos = ['Administrador','Profesor'];
+$permisos = ['Profesor'];
 permisos($permisos);
 
 //consulta las materias

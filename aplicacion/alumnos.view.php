@@ -2,7 +2,7 @@
 <?php
 require 'functions.php';
 //Define queienes tienen permiso en este archivo
-$permisos = ['Administrador','Profesor'];
+$permisos = ['Profesor'];
 permisos($permisos);
 //consulta las secciones
 $secciones = $conn->prepare("select * from secciones");
