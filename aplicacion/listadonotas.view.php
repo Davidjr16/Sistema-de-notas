@@ -14,6 +14,11 @@ $grados = $conn->prepare("select * from grados");
 $grados->execute();
 $grados = $grados->fetchAll();
 
+//consulta de alumnos
+$alumnos = $conn->prepare("select * from alumnos");
+$alumnos->execute();
+$alumnos = $alumnos->fetchAll();
+
 //consulta las secciones
 $secciones = $conn->prepare("select * from secciones");
 $secciones->execute();
@@ -28,7 +33,7 @@ $secciones = $secciones->fetchAll();
 </head>
 <body>
 <div class="header">
-    <h1>Registro de Notas"</h1>
+    <h1>Registro de Notas</h1>
     <h3>Usuario:  <?php echo $_SESSION["username"] ?></h3>
 </div>
 <nav>
@@ -49,20 +54,20 @@ $secciones = $secciones->fetchAll();
         <?php
         if(!isset($_GET['consultar'])){
             ?>
-            <p>Seleccione el grado, el aprendiz, la materia y la sección</p>
+            <p>Seleccione el grado, el estudiante, la materia y la sección</p>
             <form method="get" class="form" action="listadonotas.view.php">
                 <label>Seleccione el Grado</label><br>
                 <select name="grado" required>
                     <?php foreach ($grados as $grado):?>
                         <option value="<?php echo $grado['id'] ?>"><?php echo $grado['nombre'] ?></option>
-                    <?php endforeach;?><br>
+                    <?php endforeach;?>
                 </select>
                 <br><br>
-                <label>Seleccione el Alumno</label><br>
+                <label>Seleccione el alumno</label><br>
                 <select name="grado" required>
                     <?php foreach ($alumnos as $alumno):?>
-                        <option value="<?php echo $alumno['id'] ?>"><?php echo $alumno['nombre'] ?></option>
-                    <?php endforeach;?><br>
+                        <option value="<?php echo $alumno['id'] ?>"><?php echo $alumno['nombres'] ?></option>
+                    <?php endforeach;?>
                 </select>
                 <br><br>
                 <label>Seleccione la Materia</label><br>
@@ -171,7 +176,7 @@ $secciones = $secciones->fetchAll();
 </div>
 
 <footer>
-    <p>Derechos reservados &copy; 2023</p>
+    <p>Derechos reservados &copy; 2020</p>
 </footer>
 
 </body>
