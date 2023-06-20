@@ -14,7 +14,7 @@ $grados = $conn->prepare("select * from grados");
 $grados->execute();
 $grados = $grados->fetchAll();
 
-//consulta de alumnos
+//consulta de grados
 $alumnos = $conn->prepare("select * from alumnos");
 $alumnos->execute();
 $alumnos = $alumnos->fetchAll();
@@ -54,7 +54,7 @@ $secciones = $secciones->fetchAll();
         <?php
         if(!isset($_GET['consultar'])){
             ?>
-            <p>Seleccione el grado, el estudiante, la materia y la sección</p>
+            <p>Seleccione el grado, el estudiante, la materia, el alumno y la sección</p>
             <form method="get" class="form" action="listadonotas.view.php">
                 <label>Seleccione el Grado</label><br>
                 <select name="grado" required>
@@ -63,13 +63,14 @@ $secciones = $secciones->fetchAll();
                     <?php endforeach;?>
                 </select>
                 <br><br>
-                <label>Seleccione el alumno</label><br>
-                <select name="grado" required>
-                    <?php foreach ($alumnos as $alumno):?>
-                        <option value="<?php echo $alumno['id'] ?>"><?php echo $alumno['nombres'] ?></option>
+
+                <label>Seleccione el alumnos</label><br>
+                <select name="alumno" required>
+                    <?php foreach ($alumnos as $alumnos):?>
+                        <option value="<?php echo $alumnos['id'] ?>"><?php echo $alumnos['nombres'] ?></option>
                     <?php endforeach;?>
                 </select>
-                <br><br>
+                
                 <label>Seleccione la Materia</label><br>
                 <select name="materia" required>
                     <?php foreach ($materias as $materia):?>
@@ -97,6 +98,7 @@ $secciones = $secciones->fetchAll();
         if(isset($_GET['consultar'])){
             $id_materia = $_GET['materia'];
             $id_grado = $_GET['grado'];
+            $id_alumno = $_GET['alumno'];
             $id_seccion = $_GET['seccion'];
 
             //extrayendo el numero de evaluaciones para esa materia seleccionada
@@ -121,7 +123,7 @@ $secciones = $secciones->fetchAll();
             <br>
 
 
-                <table class="table" cellpadding="0" cellspacing="0">
+            <table class="table" cellpadding="0" cellspacing="0">
                     <tr>
                         <th>No de lista</th><th>Apellidos</th><th>Nombres</th>
                         <?php
@@ -129,8 +131,10 @@ $secciones = $secciones->fetchAll();
                             echo '<th>Nota '.$i .'</th>';
                         }
                         ?>
-                        <th>Promedio</th>
+                          <th>Promedio</th>
                         <th>Observaciones</th>
+                        <th></th>
+                        
                     </tr>
                     <?php foreach ($alumnos as $index => $alumno) :?>
                         <!-- campos ocultos necesarios para realizar el insert-->
@@ -151,19 +155,19 @@ $secciones = $secciones->fetchAll();
 
                                 }
 
-                            echo '<td align="center">'.number_format($alumno['promedio'], 2).'</td>';
-                            //echo '<td><a href="notas.view.php?grado='.$id_grado.'&materia='.$id_materia.'&seccion='.$id_seccion.'">Editar</a> </td>';
-                            $promediototal += number_format($alumno['promedio'], 2);
-                            echo '<td>'. $alumno['observaciones']. '</td>';
-                            ?>
+                                echo '<td align="center">'.number_format($alumno['promedio'], 2).'</td>';
+                                //echo '<td><a href="notas.view.php?grado='.$id_grado.'&materia='.$id_materia.'&seccion='.$id_seccion.'">Editar</a> </td>';
+                                $promediototal += number_format($alumno['promedio'], 2);
+                                echo '<td>'. $alumno['observaciones']. '</td>';
+                                ?>
 
                         </tr>
-                    <?php endforeach;?>
+                        <?php endforeach;?>
                     <tr><td colspan="3"><?php
                         for($i = 0; $i < $num_eval; $i++){
                             echo '<td><div class="text-center" id="promedio'.$i .'"><div></td>';
                         }
-                        ?><td align="center"><?php echo number_format($promediototal / $num_alumnos,2) ?></td></tr>
+                        ?><td align="center"><?php echo number_format($promediototal / 2) ?></td></tr>
                 </table>
 
                 <br>

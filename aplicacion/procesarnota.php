@@ -9,6 +9,7 @@ else {
     $id_materia = htmlentities($_POST ['id_materia']);
     $id_grado = htmlentities($_POST ['id_grado']);
     $id_seccion = htmlentities($_POST ['id_seccion']);
+    $id_alumno  = htmlentities($_POST ['id_alumno']);
     $num_eval = htmlentities($_POST ['num_eval']);
     $num_alumnos = htmlentities($_POST['num_alumnos']);
 
@@ -40,9 +41,9 @@ else {
 
         }
         if (isset($result)) {
-            header('location:notas.view.php?grado='.$id_grado.'&materia='.$id_materia.'&seccion='.$id_seccion.'&revisar=1&info=1');
+            header('location:notas.view.php?grado='.$id_grado.'&materia='.$id_materia.'&seccion='.$id_seccion.'&revisar=1&info=1'.$id_alumno.'&alumno');
         } else {
-            header('location:notas.view.php?grado='.$id_grado.'&materia='.$id_materia.'&seccion='.$id_seccion.'&revisar=1&err=1');
+            header('location:notas.view.php?grado='.$id_grado.'&materia='.$id_materia.'&seccion='.$id_seccion.'&revisar=1&err=1'.$id_alumno.'&alumno');
         }// validación de registro*/
 
     //sino boton modificar que esta en el archivo alumnoedit.view.php

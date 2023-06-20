@@ -15,6 +15,11 @@ $grados = $conn->prepare("select * from grados");
 $grados->execute();
 $grados = $grados->fetchAll();
 
+//consulta de alumnos
+$alumno = $conn->prepare("select * from alumnos");
+$alumno->execute();
+$alumnos = $alumno->fetchAll();
+
 //consulta las secciones
 $secciones = $conn->prepare("select * from secciones");
 $secciones->execute();
@@ -86,6 +91,7 @@ $secciones = $secciones->fetchAll();
         if(isset($_GET['revisar'])){
             $id_materia = $_GET['materia'];
             $id_grado = $_GET['grado'];
+            
             $id_seccion = $_GET['seccion'];
 
             //extrayendo el numero de evaluaciones para esa materia seleccionada
@@ -111,9 +117,9 @@ $secciones = $secciones->fetchAll();
 
             <table class="table" cellpadding="0" cellspacing="0">
                 <tr>
-                    <th>No de lista</th><th>Apellidos</th><th>Nombres</th>
+                <th>No de lista</th><th>Apellidos</th><th>Nombres</th>
                     <?php
-                        for($i = 1; $i <= $num_eval; $i++){
+                        for($i = 0; $i <= $num_eval; $i++){
                            echo '<th>Nota '.$i .'</th>';
                         }
                     ?>
@@ -161,7 +167,7 @@ $secciones = $secciones->fetchAll();
                                 }
                             }
 
-                            echo '<td align="center">'.number_format($alumno['promedio'], 2).'</td>';
+                            echo '<td align="center">'.number_format($alumno['promedio'], 1).'</td>';
 
                             if(existeNota($alumno['id'],$id_materia,$conn) > 0){
                                 echo '<td><input type="text" maxlength="100" value="'.$alumno['observaciones'].'" name="observaciones' . $index . '" class="txtnota"></td>';
@@ -172,7 +178,7 @@ $secciones = $secciones->fetchAll();
                         if(existeNota($alumno['id'],$id_materia,$conn) > 0){
                             echo '<td><a href="notadelete.php?idalumno='.$alumno['id'].'&idmateria='.$id_materia.'">Eliminar</a> </td>';
                         }else{
-                            echo '<td>Sin notas</td>';
+                            echo '<td></td>';
                         }
                         ?>
                     </tr>

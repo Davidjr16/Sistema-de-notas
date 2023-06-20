@@ -5,8 +5,8 @@ if($_SESSION['rol'] =='Profesor') {
         try {
             $id_alumno = $_GET['idalumno'];
             $id_materia = $_GET['idmateria'];
-            $alumno = $conn->prepare("delete from notas where id_alumno = " . $id_alumno . " and id_materia = " . $id_materia);
-            $alumno->execute();
+            $alumnos = $conn->prepare("delete from notas where id_alumno = " . $id_alumno . " and id_materia = " . $id_materia);
+            $alumnos->execute();
             header('Location: ' . $_SERVER['HTTP_REFERER']);
         } catch (PDOException $e) {
             echo $e->getMessage();
