@@ -127,7 +127,7 @@ $secciones = $secciones->fetchAll();
                     <tr>
                         <th>No de lista</th><th>Apellidos</th><th>Nombres</th>
                         <?php
-                        for($i = 1; $i <= $num_eval; $i++){
+                        for($i = 0; $i <= $num_eval; $i++){
                             echo '<th>Nota '.$i .'</th>';
                         }
                         ?>
